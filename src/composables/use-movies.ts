@@ -4,9 +4,9 @@ import { MovieType, Nullabel } from '@/shared/types';
 
 export function useMovies() {
     const movies = ref<MovieType[]>([]);
-    const totalResults = ref(0);
-    const currentPage = ref(1);
-    const searchQuery = ref('');
+    const totalResults = ref<number>(0);
+    const currentPage = ref<number>(1);
+    const searchQuery = ref<string>('');
     const isLoading = ref<Boolean>(false);
     const error = ref<Nullabel<string>>(null);
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ProfileIcon from '@/assets/icons/profile.svg'
-import Input from '@components/Input/input.vue';
+import ProfileIcon from '@/assets/icons/profile.svg';
+
 </script>
 
 <template>
@@ -8,11 +8,9 @@ import Input from '@components/Input/input.vue';
         <div class="logo">
             <img src="/logo.svg" alt="logo" class="logo" />
         </div>
-        <div class="search-bar">
-            <Input value="Batman" icon/>
-        </div>
+        <slot />
         <div class="profile-bar">
-            <ProfileIcon />
+            <ProfileIcon class="profile-icon" />
             <p>Your Name</p>
         </div>
     </header>
@@ -27,13 +25,16 @@ import Input from '@components/Input/input.vue';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
 }
 
 .profile-bar {
     display: flex;
     align-items: center;
     gap: 0.56rem;
+}
+
+.profile-icon {
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

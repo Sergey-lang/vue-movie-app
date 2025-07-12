@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MovieType } from '@shared/types'
-import MovieCard from '@components/MovieCard/movie-card.vue'
+import MovieCard from '@components/MovieCard'
 
 defineProps<{
     movies: MovieType[]
@@ -25,6 +25,7 @@ defineProps<{
     gap: 1rem;
     margin: 0 auto;
     padding-top: 3.125rem;
+    padding-bottom: 5.25rem;
     width: 100%;
     align-items: start;
 }
