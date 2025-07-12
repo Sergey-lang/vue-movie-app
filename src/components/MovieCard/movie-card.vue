@@ -26,16 +26,22 @@ const fallback = '/placeholder.png';
     gap: 1.43rem;
     flex-direction: column;
     overflow: hidden;
-    background: #fff;
+    background: white;
     transition: transform 0.3s;
+}
+
+.movie-card:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+    z-index: 1;
 }
 
 .movie-poster {
     height: auto;
-    max-height: 365px;
+    max-height: 22.81rem;
     object-fit: cover;
-    border-radius: 10px;
-    outline: 1px solid #3256E3;
+    border-radius: 0.625rem;
+    outline: 1px solid var(--color-blue-primary);
     outline-offset: -1px;
 }
 
@@ -51,18 +57,18 @@ const fallback = '/placeholder.png';
 
 .movie-info-text {
     font-size: 1rem;
-    color: #000000;
+    color: black;
 }
 
 @media (max-width: 1024px) {
     .movie-poster {
-        max-height: 597px;
+        max-height: 37.31rem;
     }
 }
 
 @media (max-width: 768px) {
     .movie-poster {
-        max-height: 904px;
+        max-height: 56.5rem;
     }
 }
 

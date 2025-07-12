@@ -2,7 +2,7 @@ import { ref, computed } from 'vue';
 import { searchMovies } from '@/shared/api/movie';
 import { MovieType, Nullabel } from '@/shared/types';
 
-export function useMovies() {
+export const useMovies = () => {
     const movies = ref<MovieType[]>([]);
     const totalResults = ref<number>(0);
     const currentPage = ref<number>(1);

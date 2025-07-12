@@ -34,15 +34,20 @@ const props = withDefaults(
 
 .input {
     width: 17.5rem;
-    --color-dark-grey: #E6EAF5;
     --color-dark-grey-text: #929BBC;
     --x-padding: 0.9375rem;
     --y-padding: 0.625rem;
-    border: 1px solid var(--color-dark-grey);
+    border: 1px solid var(--color-border);
     border-radius: 0.31rem;
     font-size: 0.875rem;
     color: var(--color-dark-grey-text);
     padding: var(--y-padding) calc(var(--x-padding) + 1rem + 2px) var(--y-padding) var(--x-padding);
+}
+
+.input:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+    z-index: 1;
 }
 
 .search-icon {

@@ -50,14 +50,16 @@ const handleInput = (e: Event) => {
             v-if="debouncedQuery"
             :query="debouncedQuery"
             :totalResults="totalResults" />
-        <CardGrid :movies="movies" v-if="movies.length" />
-        <Empty v-if="!movies.length" />
-        <Pagination
-            v-if="totalPages > 1"
-            :current-page="currentPage"
-            :total-pages="totalPages"
-            @change="handlePageChange"
-        />
+        <main>
+            <CardGrid :movies="movies" v-if="movies.length" />
+            <Empty v-if="!movies.length" />
+            <Pagination
+                v-if="totalPages > 1"
+                :current-page="currentPage"
+                :total-pages="totalPages"
+                @change="handlePageChange"
+            />
+        </main>
     </BaseContainer>
 </template>
 

@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue';
 
-export function useDebouncedRef<T>(initialValue: T, delay = 500) {
+export const useDebouncedRef = <T>(initialValue: T, delay = 500) => {
     const state = ref(initialValue);
     const debounced = ref(initialValue);
 
@@ -14,4 +14,4 @@ export function useDebouncedRef<T>(initialValue: T, delay = 500) {
     });
 
     return { state, debounced };
-}
+};

@@ -40,14 +40,6 @@ const props = withDefaults(
 
 <style scoped>
 .button {
-    --color-blue-primary: #3256E3;
-    --color-blue: #234FEB;
-    --color-blue-hover: #0A39DC;
-    --color-primary-hover: #3256E3;
-    --color-border: #E6EAF5;
-    --color-disabled-bg: #E6EAF5;
-    --color-disabled-text: #929BBC;
-
     padding: 0.438rem 0.9716rem;
     display: flex;
     align-items: center;
@@ -57,6 +49,12 @@ const props = withDefaults(
     font-size: 0.875rem;
     gap: 0.31rem;
     cursor: pointer;
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+    z-index: 1;
 }
 
 .variant--primary {
@@ -69,7 +67,7 @@ const props = withDefaults(
 
 .variant--secondary {
     background: transparent;
-    border: 1px solid var(--color-disabled-bg);
+    border: 1px solid var(--color-border);
     color: var(--color-blue);
 }
 
@@ -89,7 +87,7 @@ const props = withDefaults(
 }
 
 .button:disabled {
-    background: var(--color-disabled-bg);
+    background: var(--color-border);
     color: var(--color-disabled-text);
 }
 

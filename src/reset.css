@@ -8,8 +8,8 @@
 }
 
 html, body {
+    font-family: 'Gilroy', system-ui, Avenir, Helvetica, Arial, sans-serif;
     height: 100%;
-    font-family: 'Gilroy', system-ui, sans-serif;
     background-color: #fff;
     color: #111;
     -webkit-font-smoothing: antialiased;

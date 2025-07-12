@@ -97,13 +97,12 @@ const handleClick = (item: number | string) => {
 
 .pagination {
     --border-radius: 0.3125rem;
-    --border-color: #E6EAF5;
 
     width: min-content;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
 }
 
@@ -117,8 +116,14 @@ const handleClick = (item: number | string) => {
     color: #010515;
 }
 
+.pagination-button:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+    z-index: 1;
+}
+
 .pagination-button:not(:last-child) {
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--color-border);
 }
 
 .pagination-button:first-child {
@@ -136,7 +141,7 @@ const handleClick = (item: number | string) => {
 }
 
 .arrow {
-    color: #3256E3;
+    color: var(--color-blue-primary);
 }
 
 .arrow-right {
