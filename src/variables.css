@@ -1,0 +1,17 @@
+:root {
+    /*breakpoints*/
+
+    --breakpoint-xs: 320px;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+
+    /*colors*/
+
+    --color-blue: #234FEB;
+    --color-blue-primary: #3256E3;
+    --color-blue-hover: #0A39DC;
+    --color-border: #E6EAF5;
+    --color-disabled-text: #929BBC;
+}
