@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import Button from '@components/Button/button.vue';
+import Button from '@components/Button';
 import { defineProps } from 'vue';
 
-const props = defineProps<{ totalResults?: number}>();
+const props = defineProps<{ totalResults?: number, query: string}>();
 </script>
 
 <template>
     <div class="search-bar">
-        <div class="search-result">You searched for: Batman</div>
+        <div class="search-result">You searched for: {{ query}}</div>
         <Button variant="primary" icon >{{ totalResults }} results</Button>
     </div>
 </template>

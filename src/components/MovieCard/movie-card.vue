@@ -8,7 +8,7 @@ const fallback = '/placeholder.png';
 
 <template>
     <article class="movie-card">
-        <img :src="Poster !== 'N/A' ? Poster : fallback" :alt="Title" class="movie-poster" />
+        <img :src="Poster !== 'N/A' ? Poster : fallback" :alt="Title" class="movie-poster" loading="lazy" />
         <div class="movie-info">
             <p class="movie-info-text">Name: {{ Title }}</p>
             <p class="movie-info-text">Year: {{ Year }}</p>
