@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import ProfileIcon from '@/assets/icons/profile.svg';
-
+import ProfileIcon from '@components/icons/profile-icon.vue';
 </script>
 
 <template>
@@ -17,7 +16,6 @@ import ProfileIcon from '@/assets/icons/profile.svg';
 </template>
 
 <style scoped>
-
 .header {
     height: 8.1rem;
     padding-top: 3rem;
@@ -50,5 +48,4 @@ import ProfileIcon from '@/assets/icons/profile.svg';
         display: none;
     }
 }
-
 </style>

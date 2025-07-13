@@ -1,14 +1,28 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import { MovieType } from '../../shared/types';
 
 const props = defineProps<MovieType>();
-const fallback = '/placeholder.png';
+const fallback = '/no-image.png';
+
+const imgSrc = ref(props.Poster !== 'N/A' ? props.Poster : fallback);
+
+const handleImgError = () => {
+    imgSrc.value = fallback;
+};
 </script>
 
 <template>
-    <article class="movie-card">
-        <img :src="Poster !== 'N/A' ? Poster : fallback" :alt="Title" class="movie-poster" loading="lazy" />
+    <article class="movie-card" tabindex="0">
+        <div class="poster-wrapper">
+            <img
+                :src="imgSrc"
+                :alt="Title"
+                class="movie-poster"
+                loading="lazy"
+                @error="handleImgError"
+            />
+        </div>
         <div class="movie-info">
             <p class="movie-info-text">Name: {{ Title }}</p>
             <p class="movie-info-text">Year: {{ Year }}</p>
@@ -33,16 +47,27 @@ const fallback = '/placeholder.png';
 .movie-card:focus-visible {
     outline: 2px solid var(--color-blue);
     outline-offset: 2px;
+    border-radius: 0.625rem;
     z-index: 1;
 }
 
-.movie-poster {
-    height: auto;
-    max-height: 22.81rem;
-    object-fit: cover;
+.poster-wrapper {
+    width: 100%;
+    aspect-ratio: 165 / 244;
+    overflow: hidden;
     border-radius: 0.625rem;
     outline: 1px solid var(--color-blue-primary);
     outline-offset: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .movie-info {
@@ -59,23 +84,4 @@ const fallback = '/placeholder.png';
     font-size: 1rem;
     color: black;
 }
-
-@media (max-width: 1024px) {
-    .movie-poster {
-        max-height: 37.31rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .movie-poster {
-        max-height: 56.5rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .movie-card:hover {
-        transform: scale(1.03);
-    }
-}
-
 </style>

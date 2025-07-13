@@ -18,7 +18,7 @@ fetchMovies('Batman');
 
 const handlePageChange = (page: number) => {
     currentPage.value = page;
-    fetchMovies(query, page);
+    fetchMovies(query.value, page);
 };
 
 watch(debouncedQuery, (newQuery) => {
@@ -46,10 +46,7 @@ const handleInput = (e: Event) => {
                 />
             </div>
         </Header>
-        <SearchBar
-            v-if="debouncedQuery"
-            :query="debouncedQuery"
-            :totalResults="totalResults" />
+        <SearchBar v-if="debouncedQuery" :query="debouncedQuery" :totalResults="totalResults" />
         <main>
             <CardGrid :movies="movies" v-if="movies.length" />
             <Empty v-if="!movies.length" />
@@ -63,5 +60,4 @@ const handleInput = (e: Event) => {
     </BaseContainer>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

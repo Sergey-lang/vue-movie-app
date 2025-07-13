@@ -5,7 +5,6 @@
 </template>
 
 <style scoped>
-
 .no-result {
     display: flex;
     flex-direction: column;
