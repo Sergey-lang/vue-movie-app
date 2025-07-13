@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import SearchIcon from '@/assets/icons/search.svg';
-
+import SearchIcon from '@components/icons/search-icon.vue';
 
 const props = withDefaults(
     defineProps<{
@@ -16,7 +15,7 @@ const props = withDefaults(
     <div class="input-wrapper">
         <input
             class="input"
-            :class="[`variant--${variant}`,`size--${size}`]"
+            :class="[`variant--${variant}`, `size--${size}`]"
             v-bind="$attrs"
             :type="type"
             :disabled="disabled"
@@ -27,14 +26,13 @@ const props = withDefaults(
 </template>
 
 <style scoped>
-
 .input-wrapper {
     position: relative;
 }
 
 .input {
     width: 17.5rem;
-    --color-dark-grey-text: #929BBC;
+    --color-dark-grey-text: #929bbc;
     --x-padding: 0.9375rem;
     --y-padding: 0.625rem;
     border: 1px solid var(--color-border);
@@ -57,5 +55,4 @@ const props = withDefaults(
     transform: translateY(-50%);
     pointer-events: none;
 }
-
 </style>

@@ -2,18 +2,17 @@
 import Button from '@components/Button';
 import { defineProps } from 'vue';
 
-const props = defineProps<{ totalResults?: number, query: string}>();
+defineProps<{ totalResults?: number; query: string }>();
 </script>
 
 <template>
     <div class="search-bar">
-        <div class="search-result">You searched for: {{ query}}</div>
-        <Button variant="primary" icon >{{ totalResults }} results</Button>
+        <div class="search-result">You searched for: {{ query }}</div>
+        <Button variant="primary" icon>{{ totalResults }} results</Button>
     </div>
 </template>
 
 <style scoped>
-
 .search-bar {
     gap: 1.06rem;
     height: 2.55rem;
@@ -31,5 +30,4 @@ const props = defineProps<{ totalResults?: number, query: string}>();
         justify-content: center;
     }
 }
-
 </style>

@@ -1,31 +1,24 @@
 <script setup lang="ts">
-import PlusIcon from '@/assets/icons/plus.svg';
+import PlusIcon from '@components/icons/plus-icon.vue';
 
-type Variant = 'primary' | 'secondary' | 'third' | 'line'
-type Size = 's' | 'l'
+type Variant = 'primary' | 'secondary' | 'third' | 'line';
+type Size = 's' | 'l';
 
-const props = withDefaults(
+const { variant = 'primary', size = 's', type = 'button', icon = false } =
     defineProps<{
-        variant?: Variant
-        size?: Size
+        variant?: Variant;
+        size?: Size;
         icon?: boolean;
-        type?: 'button' | 'submit' | 'reset'
-        disabled?: boolean
-        autofocus?: boolean
-    }>(),
-    {
-        variant: 'primary',
-        size: 's',
-        type: 'button',
-        icon: false,
-    },
-);
+        type?: 'button' | 'submit' | 'reset';
+        disabled?: boolean;
+        autofocus?: boolean;
+    }>();
 </script>
 
 <template>
     <button
         class="button"
-        :class="[`variant--${variant}`,`size--${size}`]"
+        :class="[`variant--${variant}`, `size--${size}`]"
         v-bind="$attrs"
         :type="type"
         :disabled="disabled"
@@ -33,8 +26,11 @@ const props = withDefaults(
     >
         <PlusIcon
             v-if="icon && variant !== 'primary'"
-            :class="['icon', { 'icon--disabled': disabled }]" />
-        <p><slot/></p>
+            :class="['icon', { 'icon--disabled': disabled }]"
+        />
+        <p>
+            <slot />
+        </p>
     </button>
 </template>
 
@@ -98,5 +94,4 @@ const props = withDefaults(
 .icon--disabled {
     color: var(--color-disabled-text);
 }
-
 </style>

@@ -1,24 +1,19 @@
 <script setup lang="ts">
-import type { MovieType } from '@shared/types'
-import MovieCard from '@components/MovieCard'
+import type { MovieType } from '@shared/types';
+import MovieCard from '@components/MovieCard';
 
 defineProps<{
-    movies: MovieType[]
-}>()
+    movies: MovieType[];
+}>();
 </script>
 
 <template>
     <div class="movie-grid">
-        <MovieCard
-            v-for="movie in movies"
-            :key="movie.imdbID"
-            v-bind="movie"
-        />
+        <MovieCard v-for="movie in movies" :key="movie.imdbID" v-bind="movie" />
     </div>
 </template>
 
 <style scoped>
-
 .movie-grid {
     display: flex;
     flex-direction: column;
@@ -49,4 +44,3 @@ defineProps<{
     }
 }
 </style>
-

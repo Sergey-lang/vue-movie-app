@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import ArrowIcon from '@assets/icons/arrow.svg';
+import ArrowIcon from '@components/icons/arrow-icon.vue';
 
 const props = defineProps<{
-    currentPage: number
-    totalPages: number
+    currentPage: number;
+    totalPages: number;
 }>();
 
 const emit = defineEmits<{
-    (e: 'change', page: number): void
+    (e: 'change', page: number): void;
 }>();
 
 const pagesToShow = computed(() => {
@@ -66,21 +66,25 @@ const handleClick = (item: number | string) => {
                 v-for="item in pagesToShow"
                 :key="item"
                 :disabled="item === 'dots'"
-                :class="['pagination-button',
-                {
-                    active: item === currentPage,
-                    dots: item === 'dots',
-                    'arrow': item === 'prev' || item === 'next',
-                    'arrow-disabled': (item === 'prev' && currentPage === 1) || (item === 'next' && currentPage === totalPages),
-                }]"
+                :class="[
+                    'pagination-button',
+                    {
+                        active: item === currentPage,
+                        dots: item === 'dots',
+                        arrow: item === 'prev' || item === 'next',
+                        'arrow-disabled':
+                            (item === 'prev' && currentPage === 1) ||
+                            (item === 'next' && currentPage === totalPages),
+                    },
+                ]"
                 @click="handleClick(item)"
             >
-            <span v-if="item === 'prev'">
-                <ArrowIcon class="arrow arrow-left" />
-            </span>
+                <span v-if="item === 'prev'">
+                    <ArrowIcon class="arrow arrow-left" />
+                </span>
                 <span v-else-if="item === 'next'">
-                <ArrowIcon class="arrow arrow-right" />
-            </span>
+                    <ArrowIcon class="arrow arrow-right" />
+                </span>
                 <span v-else-if="item === 'dots'">...</span>
                 <span v-else>{{ item }}</span>
             </button>
@@ -89,7 +93,6 @@ const handleClick = (item: number | string) => {
 </template>
 
 <style scoped>
-
 .pagination-wrapper {
     display: flex;
     justify-content: center;
@@ -137,7 +140,7 @@ const handleClick = (item: number | string) => {
 }
 
 .pagination-button.active {
-    background-color: #F3F5F9;
+    background-color: #f3f5f9;
 }
 
 .arrow {
@@ -149,7 +152,7 @@ const handleClick = (item: number | string) => {
 }
 
 .arrow-disabled svg {
-    color: #929BBC;
+    color: #929bbc;
     pointer-events: none;
 }
 

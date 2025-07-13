@@ -5,7 +5,6 @@
 </template>
 
 <style scoped>
-
 .base-container {
     max-width: 72.3rem;
     margin: 0 auto;
