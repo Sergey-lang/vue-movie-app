@@ -12,23 +12,32 @@ import Input from '@components/Input/input.vue';
 
 const { movies, fetchMovies, isLoading, totalPages, currentPage, totalResults } = useMovies();
 
-const { state: query, debounced: debouncedQuery } = useDebouncedRef('Batman', 2000);
+const { state: query, debounced: debouncedQuery, cancel } = useDebouncedRef('Batman', 2000);
 
 fetchMovies('Batman');
 
 const handlePageChange = (page: number) => {
     currentPage.value = page;
-    fetchMovies(query.value, page);
+    fetchMovies(query.value.trim(), page);
 };
 
 watch(debouncedQuery, (newQuery) => {
     currentPage.value = 1;
-    fetchMovies(newQuery, 1);
+    fetchMovies(newQuery.trim(), 1);
 });
 
 const handleInput = (e: Event) => {
     query.value = (e.target as HTMLInputElement).value;
 };
+
+const handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' && query.value.trim()) {
+        cancel();
+        currentPage.value = 1;
+        fetchMovies(query.value.trim(), 1);
+    }
+};
+
 </script>
 
 <template>
@@ -38,6 +47,7 @@ const handleInput = (e: Event) => {
                 <Input
                     :value="query"
                     @input="handleInput"
+                    @keydown="handleKeydown"
                     icon
                     autocomplete="off"
                     aria-label="Search for a movie"
@@ -48,7 +58,10 @@ const handleInput = (e: Event) => {
         </Header>
         <SearchBar v-if="debouncedQuery" :query="debouncedQuery" :totalResults="totalResults" />
         <main>
-            <CardGrid :movies="movies" v-if="movies.length" />
+            <CardGrid
+                :movies="movies"
+                :is-loading="isLoading"
+            />
             <Empty v-if="!movies.length" />
             <Pagination
                 v-if="totalPages > 1"

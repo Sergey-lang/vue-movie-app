@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import type { MovieType } from '@shared/types';
 import MovieCard from '@components/MovieCard';
+import MovieSkeleton from '@components/Skeletons/MovieSkeleton/movie-skeleton.vue';
 
 defineProps<{
     movies: MovieType[];
+    isLoading: boolean;
 }>();
 </script>
 
 <template>
     <div class="movie-grid">
-        <MovieCard v-for="movie in movies" :key="movie.imdbID" v-bind="movie" />
+        <MovieSkeleton v-if="isLoading" v-for="i in 8" :key="i" />
+        <MovieCard v-if="movies.length > 0 && !isLoading" v-for="movie in movies" :key="movie.imdbID" v-bind="movie" />
     </div>
 </template>
 
