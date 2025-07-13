@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Button from '@components/Button';
-import { defineProps } from 'vue';
 
 defineProps<{ totalResults?: number; query: string }>();
 </script>
