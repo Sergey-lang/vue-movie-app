@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import SearchIcon from '@components/icons/search-icon.vue';
 
+const model = defineModel();
+
 withDefaults(
     defineProps<{
         icon?: boolean;
@@ -14,6 +16,8 @@ withDefaults(
 <template>
     <div class="input-wrapper">
         <input
+            :value="model"
+            @input="model = $event.target.value"
             class="input"
             :class="[`variant--${variant}`, `size--${size}`]"
             v-bind="$attrs"

@@ -7,7 +7,7 @@ import SearchBar from '@components/SearchBar';
 import Pagination from '@components/Pagination';
 import Empty from '@components/Empty';
 import { useDebouncedRef } from '@composables/use-debounced-ref';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import Input from '@components/Input/input.vue';
 
 const { movies, fetchMovies, isLoading, totalPages, currentPage, totalResults } = useMovies();
@@ -16,6 +16,8 @@ const { state: query, debounced: debouncedQuery, cancel } = useDebouncedRef('Bat
 
 fetchMovies('Batman');
 
+const lastSearchedQuery = ref('');
+
 const handlePageChange = (page: number) => {
     currentPage.value = page;
     fetchMovies(query.value.trim(), page);
@@ -23,18 +25,20 @@ const handlePageChange = (page: number) => {
 
 watch(debouncedQuery, (newQuery) => {
     currentPage.value = 1;
-    fetchMovies(newQuery.trim(), 1);
+    const trimmed = newQuery.trim();
+    if (trimmed !== lastSearchedQuery.value) {
+        fetchMovies(trimmed, 1);
+        lastSearchedQuery.value = trimmed;
+    }
 });
 
-const handleInput = (e: Event) => {
-    query.value = (e.target as HTMLInputElement).value;
-};
-
 const handleKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' && query.value.trim()) {
+    const trimmed = query.value.trim();
+    if (e.key === 'Enter' && trimmed && trimmed !== lastSearchedQuery.value) {
         cancel();
         currentPage.value = 1;
-        fetchMovies(query.value.trim(), 1);
+        fetchMovies(trimmed, 1);
+        lastSearchedQuery.value = trimmed;
     }
 };
 
@@ -45,8 +49,7 @@ const handleKeydown = (e: KeyboardEvent) => {
         <Header>
             <div class="search-bar">
                 <Input
-                    :value="query"
-                    @input="handleInput"
+                    v-model="query"
                     @keydown="handleKeydown"
                     icon
                     autocomplete="off"
