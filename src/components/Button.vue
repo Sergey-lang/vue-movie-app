@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import PlusIcon from '@components/icons/plus-icon.vue';
+import PlusIcon from '@components/Icons/PlusIcon.vue';
 
 type Variant = 'primary' | 'secondary' | 'third' | 'line';
 type Size = 's' | 'l';
 
-const { variant = 'primary', size = 's', type = 'button', icon = false } =
-    defineProps<{
-        variant?: Variant;
-        size?: Size;
-        icon?: boolean;
-        type?: 'button' | 'submit' | 'reset';
-        disabled?: boolean;
-        autofocus?: boolean;
-    }>();
+const {
+    variant = 'primary',
+    size = 's',
+    type = 'button',
+    icon = false,
+} = defineProps<{
+    variant?: Variant;
+    size?: Size;
+    icon?: boolean;
+    type?: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
+    autofocus?: boolean;
+}>();
 </script>
 
 <template>

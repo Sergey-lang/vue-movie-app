@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SearchIcon from '@components/icons/search-icon.vue';
+import SearchIcon from '@components/Icons/SearchIcon.vue';
 
 const model = defineModel();
 

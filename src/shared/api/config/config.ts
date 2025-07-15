@@ -21,7 +21,15 @@ export async function http<T = any>(
     options: RequestOptions = {},
 ): Promise<T> {
     const url = `${BASE_URL}${endpoint}${buildQuery(options.params)}`;
-    const response = await fetch(url);
+
+    const response = await fetch(url, {
+        method,
+        // headers: {
+        //     'Content-Type': 'application/json',
+        //     ...(options.headers || {}),
+        // },
+        body: method !== 'GET' && options.body ? JSON.stringify(options.body) : undefined,
+    });
 
     if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);

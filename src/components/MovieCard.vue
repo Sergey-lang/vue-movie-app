@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MovieType } from '../../shared/types';
+import { MovieType } from '../shared/types/movie';
 
 const props = defineProps<MovieType>();
 const fallback = '/no-image.png';

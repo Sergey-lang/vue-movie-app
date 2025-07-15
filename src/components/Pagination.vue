@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import ArrowIcon from '@components/icons/arrow-icon.vue';
+import ArrowIcon from '@components/Icons/ArrowIcon.vue';
 
 const props = defineProps<{
     currentPage: number;
