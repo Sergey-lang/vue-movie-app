@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import BaseContainer from '@shared/ui/container.vue';
-import CardGrid from '@shared/ui/card-grid.vue';
-import Header from '@components/Header';
-import { useMovies } from '@composables/use-movies';
-import SearchBar from '@components/SearchBar';
-import Pagination from '@components/Pagination';
-import Empty from '@components/Empty';
-import { useDebouncedRef } from '@composables/use-debounced-ref';
 import { ref, watch } from 'vue';
-import Input from '@components/Input/input.vue';
+import BaseContainer from '@shared/ui/Container.vue';
+import CardGrid from '@shared/ui/CardGrid.vue';
+import Header from '@components/Header.vue';
+import SearchBar from '@components/SearchBar.vue';
+import Pagination from '@components/Pagination.vue';
+import Empty from '@components/Empty.vue';
+import Input from '@components/Input.vue';
+import { useMovies } from '@composables/useMovies';
+import { useDebouncedRef } from '@composables/useDebouncedRef';
 
 const { movies, fetchMovies, isLoading, totalPages, currentPage, totalResults } = useMovies();
 
@@ -41,7 +41,6 @@ const handleKeydown = (e: KeyboardEvent) => {
         lastSearchedQuery.value = trimmed;
     }
 };
-
 </script>
 
 <template>
@@ -61,10 +60,7 @@ const handleKeydown = (e: KeyboardEvent) => {
         </Header>
         <SearchBar v-if="debouncedQuery" :query="debouncedQuery" :totalResults="totalResults" />
         <main>
-            <CardGrid
-                :movies="movies"
-                :is-loading="isLoading"
-            />
+            <CardGrid :movies="movies" :is-loading="isLoading" />
             <Empty v-if="!movies.length" />
             <Pagination
                 v-if="totalPages > 1"

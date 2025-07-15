@@ -1,7 +1,8 @@
 import vue from 'eslint-plugin-vue'
 import prettier from 'eslint-plugin-prettier'
-import tseslint from '@typescript-eslint/eslint-plugin'
+import tslint from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
+import eslintParser from 'vue-eslint-parser'
 
 export default [
   {
@@ -10,10 +11,11 @@ export default [
   {
     files: ['**/*.ts', '**/*.vue'],
     languageOptions: {
-      parser: tsParser,
+      parser: eslintParser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        parser: tsParser,
         project: './tsconfig.eslint.json',
         extraFileExtensions: ['.vue'],
       },
@@ -21,7 +23,7 @@ export default [
     plugins: {
       vue,
       prettier,
-      '@typescript-eslint': tseslint,
+      '@typescript-eslint': tslint,
     },
     rules: {
       'prettier/prettier': 'error',

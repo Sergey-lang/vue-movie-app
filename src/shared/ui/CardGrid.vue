@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MovieType } from '@shared/types';
-import MovieCard from '@components/MovieCard';
-import MovieSkeleton from '@components/Skeletons/MovieSkeleton/movie-skeleton.vue';
+import MovieCard from '@components/MovieCard.vue';
+import MovieSkeleton from '@components/Skeletons/MovieSkeleton/MovieSkeleton.vue';
 
 defineProps<{
     movies: MovieType[];
@@ -12,7 +12,12 @@ defineProps<{
 <template>
     <div class="movie-grid">
         <MovieSkeleton v-if="isLoading" v-for="i in 8" :key="i" />
-        <MovieCard v-if="movies.length > 0 && !isLoading" v-for="movie in movies" :key="movie.imdbID" v-bind="movie" />
+        <MovieCard
+            v-if="movies.length > 0 && !isLoading"
+            v-for="movie in movies"
+            :key="movie.imdbID"
+            v-bind="movie"
+        />
     </div>
 </template>
 

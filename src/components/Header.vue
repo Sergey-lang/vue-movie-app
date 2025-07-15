@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProfileIcon from '@components/icons/profile-icon.vue';
+import ProfileIcon from '@components/Icons/ProfileIcon.vue';
 </script>
 
 <template>
