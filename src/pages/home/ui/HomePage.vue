@@ -32,7 +32,7 @@ watch(debouncedQuery, (newQuery) => {
     }
 });
 
-const handleKeydown = (e: KeyboardEvent) => {
+const handleKeyup = () => {
     const trimmed = query.value.trim();
     if (trimmed && trimmed !== lastSearchedQuery.value) {
         cancel();
@@ -49,7 +49,7 @@ const handleKeydown = (e: KeyboardEvent) => {
             <div class="search-bar">
                 <Input
                     v-model="query"
-                    @keyup.enter="handleKeydown"
+                    @keyup.enter="handleKeyup"
                     icon
                     autocomplete="off"
                     aria-label="Search for a movie"
