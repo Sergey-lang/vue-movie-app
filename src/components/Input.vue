@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import SearchIcon from '@components/Icons/SearchIcon.vue';
+import { Nullable } from '@shared/types';
 
 const model = defineModel();
 
 withDefaults(
     defineProps<{
         icon?: boolean;
+        error?: Nullable<string>;
     }>(),
     {
         icon: false,
+        error: null,
     },
 );
+
 </script>
 
 <template>
@@ -26,6 +30,7 @@ withDefaults(
             :autofocus="autofocus"
         />
         <SearchIcon v-if="icon" class="search-icon" />
+        <span v-if="error" class="error">{{ error }}</span>
     </div>
 </template>
 
@@ -46,9 +51,17 @@ withDefaults(
     padding: var(--y-padding) calc(var(--x-padding) + 1rem + 2px) var(--y-padding) var(--x-padding);
 }
 
+.error {
+    position: absolute;
+    font-size: 12px;
+    bottom: -13px;
+    right: 0;
+    color: rgba(255, 0, 0, 0.8);
+}
+
 .input:focus-visible {
     outline: 2px solid var(--color-blue);
-    outline-offset: 2px;
+    outline-offset: 1px;
     z-index: 1;
 }
 

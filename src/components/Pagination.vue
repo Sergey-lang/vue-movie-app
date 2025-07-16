@@ -121,7 +121,7 @@ const handleClick = (item: number | string) => {
 
 .pagination-button:focus-visible {
     outline: 2px solid var(--color-blue);
-    outline-offset: 2px;
+    outline-offset: 1px;
     z-index: 1;
 }
 

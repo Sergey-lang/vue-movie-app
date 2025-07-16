@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import BaseContainer from '@shared/ui/Container.vue';
 import CardGrid from '@shared/ui/CardGrid.vue';
 import Header from '@components/Header.vue';
@@ -14,7 +14,9 @@ const { movies, fetchMovies, isLoading, totalPages, currentPage, totalResults } 
 
 const { state: query, debounced: debouncedQuery, cancel } = useDebouncedRef('Batman', 2000);
 
-fetchMovies('Batman');
+onMounted(() => {
+    fetchMovies(query.value);
+});
 
 const lastSearchedQuery = ref('');
 

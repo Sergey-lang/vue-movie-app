@@ -46,7 +46,7 @@ const handleImgError = () => {
 
 .movie-card:focus-visible {
     outline: 2px solid var(--color-blue);
-    outline-offset: 2px;
+    outline-offset: 1px;
     border-radius: 0.625rem;
     z-index: 1;
 }
