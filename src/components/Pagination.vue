@@ -13,33 +13,35 @@ const emit = defineEmits<{
 
 const pagesToShow = computed(() => {
     const pages: (number | string)[] = [];
-
-    pages.push('prev');
-
     const total = props.totalPages;
     const current = props.currentPage;
 
-    let start = current - 1;
-    let end = current + 1;
+    pages.push('prev');
 
-    if (current <= 2) {
-        start = 1;
-        end = 3;
-    } else if (current >= total - 1) {
-        start = total - 2;
-        end = total;
-    }
+    if (total <= 5) {
+        for (let i = 1; i <= total; i++) pages.push(i);
+    } else {
+        pages.push(1);
 
-    for (let i = start; i <= end; i++) {
-        if (i >= 1 && i <= total) {
-            pages.push(i);
+        let start = current - 1;
+        let end = current + 1;
+
+        if (current <= 3) {
+            start = 2;
+            end = 4;
+        } else if (current >= total - 2) {
+            start = total - 3;
+            end = total - 1;
         }
-    }
 
-    if (end < total - 1) {
-        pages.push('dots');
-        pages.push(total);
-    } else if (end === total - 1) {
+        if (start > 2) pages.push('dots');
+
+        for (let i = start; i <= end; i++) {
+            if (i > 1 && i < total) pages.push(i);
+        }
+
+        if (end < total - 1) pages.push('dots');
+
         pages.push(total);
     }
 
@@ -50,9 +52,9 @@ const pagesToShow = computed(() => {
 
 const handleClick = (item: number | string) => {
     if (item === 'prev') {
-        emit('change', props.currentPage - 1);
+        if (props.currentPage > 1) emit('change', props.currentPage - 1);
     } else if (item === 'next') {
-        emit('change', props.currentPage + 1);
+        if (props.currentPage < props.totalPages) emit('change', props.currentPage + 1);
     } else if (typeof item === 'number') {
         emit('change', item);
     }
@@ -65,7 +67,7 @@ const handleClick = (item: number | string) => {
             <button
                 v-for="item in pagesToShow"
                 :key="item"
-                :disabled="item === 'dots'"
+                :disabled="item === 'dots' || (item === 'prev' && currentPage === 1) || (item === 'next' && currentPage === totalPages)"
                 :class="[
                     'pagination-button',
                     {
