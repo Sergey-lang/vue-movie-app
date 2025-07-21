@@ -7,29 +7,29 @@ import SearchBar from '@components/SearchBar.vue';
 import Pagination from '@components/Pagination.vue';
 import Empty from '@components/Empty.vue';
 import Input from '@components/Input.vue';
-import { useMovies } from '@composables/useMovies';
 import { useDebouncedRef } from '@composables/useDebouncedRef';
+import { useMovieStore } from '@/stores/movie.store';
 
-const { movies, fetchMovies, isLoading, totalPages, currentPage, totalResults } = useMovies();
+const store = useMovieStore();
 
 const { state: query, debounced: debouncedQuery, cancel } = useDebouncedRef('Batman', 2000);
 
 onMounted(() => {
-    fetchMovies(query.value);
+    store.fetchMovies(query.value);
 });
 
 const lastSearchedQuery = ref('');
 
 const handlePageChange = (page: number) => {
-    currentPage.value = page;
-    fetchMovies(query.value.trim(), page);
+    store.currentPage.value = page;
+    store.fetchMovies(query.value.trim(), page);
 };
 
 watch(debouncedQuery, (newQuery) => {
-    currentPage.value = 1;
+    store.currentPage.value = 1;
     const trimmed = newQuery.trim();
     if (trimmed !== lastSearchedQuery.value) {
-        fetchMovies(trimmed, 1);
+        store.fetchMovies(trimmed, 1);
         lastSearchedQuery.value = trimmed;
     }
 });
@@ -38,8 +38,8 @@ const handleKeyup = () => {
     const trimmed = query.value.trim();
     if (trimmed && trimmed !== lastSearchedQuery.value) {
         cancel();
-        currentPage.value = 1;
-        fetchMovies(trimmed, 1);
+        store.currentPage.value = 1;
+        store.fetchMovies(trimmed, 1);
         lastSearchedQuery.value = trimmed;
     }
 };
@@ -60,14 +60,14 @@ const handleKeyup = () => {
                 />
             </div>
         </Header>
-        <SearchBar v-if="debouncedQuery" :query="debouncedQuery" :totalResults="totalResults" />
+        <SearchBar v-if="debouncedQuery" :query="debouncedQuery" :totalResults="store.totalResults" />
         <main>
-            <CardGrid :movies="movies" :is-loading="isLoading" />
-            <Empty v-if="!movies.length" />
+            <CardGrid :movies="store.movies" :is-loading="store.isLoading" />
+            <Empty v-if="!store.movies.length" />
             <Pagination
                 v-if="totalPages > 1"
-                :current-page="currentPage"
-                :total-pages="totalPages"
+                :current-page="store.currentPage"
+                :total-pages="store.totalPages"
                 @change="handlePageChange"
             />
         </main>

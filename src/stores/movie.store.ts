@@ -1,17 +1,18 @@
-import { ref, computed } from 'vue';
-import { searchMovies } from '@/shared/api/movie';
-import { MovieType, Nullabel } from '@/shared/types';
+import { defineStore } from 'pinia';
+import { MovieType, Nullabel } from '@shared/types';
+import { computed, ref } from 'vue';
+import { searchMovies } from '@shared/api/movie';
 
-export const useMovies = () => {
+export const useMovieStore = defineStore('movie', () => {
     const movies = ref<MovieType[]>([]);
     const totalResults = ref<number>(0);
     const currentPage = ref<number>(1);
-    const searchQuery = ref<string>('');
     const isLoading = ref<Boolean>(false);
     const error = ref<Nullabel<string>>(null);
 
+    const totalPages = computed(() => Math.ceil(totalResults.value / 10));
+
     const fetchMovies = async (query: string, page = 1) => {
-        searchQuery.value = query;
         currentPage.value = page;
         isLoading.value = true;
         error.value = null;
@@ -29,16 +30,13 @@ export const useMovies = () => {
         }
     };
 
-    const totalPages = computed(() => Math.ceil(totalResults.value / 10));
-
     return {
+        fetchMovies,
         movies,
         totalResults,
         currentPage,
-        searchQuery,
         isLoading,
-        error,
         totalPages,
-        fetchMovies,
-    };
-};
+        error
+    }
+})
