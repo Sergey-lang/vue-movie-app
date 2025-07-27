@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import ArrowIcon from '@components/Icons/ArrowIcon.vue';
 
-const props = defineProps<{
+const { totalPages, currentPage } = defineProps<{
     currentPage: number;
     totalPages: number;
 }>();
@@ -13,8 +13,8 @@ const emit = defineEmits<{
 
 const pagesToShow = computed(() => {
     const pages: (number | string)[] = [];
-    const total = props.totalPages;
-    const current = props.currentPage;
+    const total = totalPages;
+    const current = currentPage;
 
     pages.push('prev');
 
@@ -52,9 +52,9 @@ const pagesToShow = computed(() => {
 
 const handleClick = (item: number | string) => {
     if (item === 'prev') {
-        if (props.currentPage > 1) emit('change', props.currentPage - 1);
+        if (currentPage > 1) emit('change', currentPage - 1);
     } else if (item === 'next') {
-        if (props.currentPage < props.totalPages) emit('change', props.currentPage + 1);
+        if (currentPage < totalPages) emit('change', currentPage + 1);
     } else if (typeof item === 'number') {
         emit('change', item);
     }

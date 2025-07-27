@@ -32,7 +32,7 @@ const {
             v-if="icon && variant !== 'primary'"
             :class="['icon', { 'icon--disabled': disabled }]"
         />
-        <p>
+        <p class="btn-name">
             <slot />
         </p>
     </button>
@@ -43,7 +43,7 @@ const {
     padding: 0.438rem 0.9716rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border-radius: 0.31rem;
     color: white;
     font-size: 0.875rem;
