@@ -1,14 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '@pages/home/ui/HomePage.vue';
-import ProfilePage from '@pages/profile/ui/ProfilePage.vue';
-import AuthPage from '@pages/auth/ui/AuthPage.vue';
 
 export const router = createRouter({
     routes: [
-        { path: '/', component: AuthPage },
+        { path: '/', component: () => import('./pages/auth/ui/AuthPage.vue') },
         {
             path: '/main',
-            component: HomePage,
+            component: () => import('./pages/home/ui/HomePage.vue'),
             name: 'main',
             // children: [
             //     { path: 'profile', component: ProfilePage },
@@ -16,7 +13,7 @@ export const router = createRouter({
         },
         {
             path: '/profile',
-            component: ProfilePage,
+            component: () => import('./pages/profile/ui/ProfilePage.vue'),
             name: 'profile',
         },
     ],
