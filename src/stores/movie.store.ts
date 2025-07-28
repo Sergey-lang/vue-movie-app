@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { MovieType, Nullabel } from '@shared/types';
 import { computed, ref } from 'vue';
-import { searchMovies } from '@shared/api/movie';
+import { searchMovie, searchMovies } from '@shared/api/movie';
 
 export const useMovieStore = defineStore('movie', () => {
     const movies = ref<MovieType[]>([]);
@@ -13,14 +13,14 @@ export const useMovieStore = defineStore('movie', () => {
 
     const totalPages = computed(() => Math.ceil(totalResults.value / 10));
 
-    const fetchMovies = async (query: string, page = 1, id = '') => {
+    const fetchMovies = async (query: string, page = 1) => {
         currentPage.value = page;
         isLoading.value = true;
         error.value = null;
         queryValue.value = query;
 
         try {
-            const res = await searchMovies(query, page, id);
+            const res = await searchMovies(query, page);
 
             if (res?.Search) {
                 movies.value = res.Search;
@@ -40,7 +40,26 @@ export const useMovieStore = defineStore('movie', () => {
         }
     };
 
+    const fetchMovie = async (id = '') => {
+        isLoading.value = true;
+        error.value = null;
+
+        try {
+            const res = await searchMovie(id);
+
+            if (res?.imdbID) {
+                movies.value = [res];
+            }
+        } catch (err: any) {
+            error.value = err.message || 'Something went wrong';
+            movies.value = [];
+        } finally {
+            isLoading.value = false;
+        }
+    };
+
     return {
+        fetchMovie,
         fetchMovies,
         movies,
         totalResults,

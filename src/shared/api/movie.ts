@@ -7,12 +7,19 @@ export type SearchResponse = {
     Response: 'True';
 };
 
-export const searchMovies = (query: string, page: number = 1, id) => {
+export const searchMovies = (query: string, page: number = 1) => {
     return http<SearchResponse>('', 'GET', {
         params: {
             s: query,
-            i: id,
             page,
+        },
+    });
+};
+
+export const searchMovie = (id: string) => {
+    return http<MovieType>('', 'GET', {
+        params: {
+            i: id,
         },
     });
 };

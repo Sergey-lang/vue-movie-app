@@ -4,4 +4,5 @@ export type MovieType = {
     imdbID: string;
     Type: string;
     Poster: string;
+    Plot: string;
 };

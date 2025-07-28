@@ -1,13 +1,13 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { onMounted } from 'vue';
-import { useMovieStore } from '@/stores/movie.store.js';
-import MovieDetailsSkeleton from '@components/Skeletons/MovieSkeleton/MovieDetailsSkeleton.vue'
+import { useMovieStore } from '@/stores/movie.store.ts';
+import MovieDetailsSkeleton from '@components/Skeletons/MovieSkeleton/MovieDetailsSkeleton.vue';
 
 const route = useRoute();
 
 const handleImgError = (e) => {
-    e.target.src = '/placeholder.jpg'; // fallback image
+    e.target.src = '/placeholder.jpg';
 };
 
 const router = useRouter();
@@ -16,7 +16,9 @@ const store = useMovieStore();
 
 onMounted(() => {
     const id = route.params.imdbID;
-    store.fetchMovies('', 1, id);
+    if (typeof id === 'string') {
+        store.fetchMovie(id);
+    }
 });
 
 const back = () => router.back();
@@ -29,8 +31,8 @@ const back = () => router.back();
             <div class="poster-wrapper">
                 <img
                     v-if="!store.isLoading"
-                    :src="store.movies.Poster"
-                    :alt="store.movies.Title"
+                    :src="store.movies[0].Poster"
+                    :alt="store.movies[0].Title"
                     class="movie-poster"
                     loading="lazy"
                     @error="handleImgError"
@@ -38,15 +40,15 @@ const back = () => router.back();
             </div>
         </div>
         <div class="movie-content">
-            <h1 class="movie-title">{{ store.movies.Title }}</h1>
+            <h1 class="movie-title">{{ store.movies[0].Title }}</h1>
             <ul class="movie-meta">
-                <li><strong>Year:</strong> {{ store.movies.Year }}</li>
-                <li><strong>IMDB ID:</strong> {{ store.movies.imdbID }}</li>
-                <li><strong>Type:</strong> {{ store.movies.Type }}</li>
+                <li><strong>Year:</strong> {{ store.movies[0].Year }}</li>
+                <li><strong>IMDB ID:</strong> {{ store.movies[0].imdbID }}</li>
+                <li><strong>Type:</strong> {{ store.movies[0].Type }}</li>
             </ul>
 
             <p class="movie-description">
-                {{ store.movies.Plot }}
+                {{ store.movies[0].Plot }}
             </p>
 
             <button @click="back" class="back-button">← Back</button>
