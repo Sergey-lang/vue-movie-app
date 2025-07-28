@@ -13,23 +13,25 @@ const handleImgError = () => {
 </script>
 
 <template>
-    <article class="movie-card" tabindex="0">
-        <div class="poster-wrapper">
-            <img
-                :src="imgSrc"
-                :alt="Title"
-                class="movie-poster"
-                loading="lazy"
-                @error="handleImgError"
-            />
-        </div>
-        <div class="movie-info">
-            <p class="movie-info-text">Name: {{ Title }}</p>
-            <p class="movie-info-text">Year: {{ Year }}</p>
-            <p class="movie-info-text">imdbId: {{ imdbID }}</p>
-            <p class="movie-info-text">Type: {{ Type }}</p>
-        </div>
-    </article>
+    <RouterLink :to="`/main/${imdbID}`" class="movie-card">
+        <article class="movie-card">
+            <div class="poster-wrapper">
+                <img
+                    :src="imgSrc"
+                    :alt="Title"
+                    class="movie-poster"
+                    loading="lazy"
+                    @error="handleImgError"
+                />
+            </div>
+            <div class="movie-info">
+                <p class="movie-info-text">Name: {{ Title }}</p>
+                <p class="movie-info-text">Year: {{ Year }}</p>
+                <p class="movie-info-text">imdbId: {{ imdbID }}</p>
+                <p class="movie-info-text">Type: {{ Type }}</p>
+            </div>
+        </article>
+    </RouterLink>
 </template>
 
 <style scoped>

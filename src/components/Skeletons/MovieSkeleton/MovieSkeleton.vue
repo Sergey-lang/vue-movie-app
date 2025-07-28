@@ -14,11 +14,11 @@
 
 <style scoped>
 .movie-card {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.43rem;
     background: white;
-    padding: 0.8rem;
     border-radius: 0.625rem;
     overflow: hidden;
 }

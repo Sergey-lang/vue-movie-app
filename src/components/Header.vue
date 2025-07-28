@@ -4,15 +4,15 @@ import ProfileIcon from '@components/Icons/ProfileIcon.vue';
 
 <template>
     <header class="header">
-        <RouterLink to="main" class="logo">
+        <RouterLink to="/main" class="logo">
             <img src="/logo.svg" alt="logo" class="logo" />
         </RouterLink>
         <slot />
         <div class="profile-bar">
-            <RouterLink to="/profile">
+            <RouterLink to="/profile" active-class="active-link">
                 <div class="profile-link">
                     <ProfileIcon class="profile-icon" />
-                    <p>Your Name</p>
+                    <p>Developer</p>
                 </div>
             </RouterLink>
         </div>
@@ -39,6 +39,10 @@ import ProfileIcon from '@components/Icons/ProfileIcon.vue';
     display: flex;
     align-items: center;
     gap: 0.56rem;
+}
+
+.active-link p {
+    font-weight: bold;
 }
 
 .profile-icon {

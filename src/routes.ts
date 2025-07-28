@@ -6,15 +6,14 @@ export const router = createRouter({
         {
             path: '/main',
             component: () => import('./pages/home/ui/HomePage.vue'),
-            name: 'main',
-            // children: [
-            //     { path: 'profile', component: ProfilePage },
-            // ],
+            children: [
+                { path: '', component: () => import('./widgets/HomePageLayout/HomePageLayout.vue') },
+                { path: ':imdbID', component: () => import('./pages/movie/ui/MoviePage.vue') },
+            ],
         },
         {
             path: '/profile',
             component: () => import('./pages/profile/ui/ProfilePage.vue'),
-            name: 'profile',
         },
     ],
     history: createWebHistory(),
