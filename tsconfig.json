@@ -20,7 +20,8 @@
       "@composables/*": ["src/composables/*"],
       "@shared/*": ["src/shared/*"],
       "@pages/*": ["src/pages/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@widgets/*": ["src/widgets/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.vue"],

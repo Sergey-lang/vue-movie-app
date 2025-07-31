@@ -1,5 +1,17 @@
 <script setup lang="ts">
 import ProfileIcon from '@components/Icons/ProfileIcon.vue';
+import ExitIcon from '@components/Icons/ExitIcon.vue';
+import { useAuthStore } from '@/stores/auth.store';
+import { useRouter } from 'vue-router';
+
+const authStore = useAuthStore();
+const router = useRouter();
+
+const logout = () => {
+    authStore.clearToken();
+    router.push({ name: 'auth' });
+};
+
 </script>
 
 <template>
@@ -8,14 +20,21 @@ import ProfileIcon from '@components/Icons/ProfileIcon.vue';
             <img src="/logo.svg" alt="logo" class="logo" />
         </RouterLink>
         <slot />
-        <div class="profile-bar">
-            <RouterLink to="/profile" active-class="active-link">
-                <div class="profile-link">
-                    <ProfileIcon class="profile-icon" />
-                    <p>Developer</p>
-                </div>
-            </RouterLink>
-        </div>
+        <ul class="profile-bar">
+            <li>
+                <RouterLink to="/profile" active-class="active-link" title="View Profile">
+                    <div class="profile-link">
+                        <ProfileIcon class="profile-icon" />
+                        <p>Developer</p>
+                    </div>
+                </RouterLink>
+            </li>
+            <li>
+                <a href="#" @click="logout" aria-label="Logout" title="Logout">
+                    <ExitIcon class="exit-icon" />
+                </a>
+            </li>
+        </ul>
     </header>
 </template>
 
@@ -46,6 +65,12 @@ import ProfileIcon from '@components/Icons/ProfileIcon.vue';
 }
 
 .profile-icon {
+    cursor: pointer;
+}
+
+.exit-icon {
+    width: 1rem;
+    height: auto;
     cursor: pointer;
 }
 

@@ -53,7 +53,7 @@ withDefaults(
 
 .error {
     position: absolute;
-    font-size: 12px;
+    font-size: 0.75rem;
     bottom: -13px;
     right: 0;
     color: rgba(255, 0, 0, 0.8);
