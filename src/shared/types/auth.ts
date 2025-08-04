@@ -1,6 +1,8 @@
 export type ProfileType = {
     id: number;
-    firstName: string;
-    lastName: string;
-    bio?: string;
+    email: string;
+    password: string;
+    name: string;
+    role: string;
+    avatar: string;
 }

@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import ProfileIcon from '@components/Icons/ProfileIcon.vue';
+import { useProfileStore } from '@/stores/profile.store';
+
+const profileStore = useProfileStore();
 </script>
 
 <template>
     <div class="profile">
-        <ProfileIcon class="avatar" />
-        <h1 class="name">Develop Developerskiy</h1>
-        <p class="role">Frontend-разработчик • Vue, TypeScript, UI/UX</p>
+        <img :src="profileStore.profile.avatar" alt="avatar" class="avatar" />
+        <h1 class="name">{{ profileStore.profile.name}}</h1>
+        <p class="role">Frontend-разработчик • Vue, TypeScript, UI/UX, {{profileStore.profile.role}}</p>
         <p class="bio">
             Увлекаюсь созданием интерфейсов для кино-приложений. Люблю лаконичный код и хорошую типографику.
         </p>
         <ul class="links">
             <li><a href="https://github.com/username" target="_blank">GitHub</a></li>
             <li><a href="https://t.me/username" target="_blank">Telegram</a></li>
-            <li><a href="mailto:email@example.com">email@example.com</a></li>
+            <li><a :href="'mailto:' + profileStore.profile.email">{{profileStore.profile.email}}</a></li>
         </ul>
     </div>
 </template>

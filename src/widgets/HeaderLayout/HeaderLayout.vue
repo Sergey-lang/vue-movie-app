@@ -24,7 +24,6 @@ watch(debouncedQuery, (newQuery) => {
 
 const handleKeyup = () => {
     const trimmed = query.value.trim();
-    console.log(trimmed);
     if (trimmed && trimmed !== lastSearchedQuery.value) {
         cancel();
         store.currentPage = 1;

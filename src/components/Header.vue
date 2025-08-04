@@ -3,9 +3,18 @@ import ProfileIcon from '@components/Icons/ProfileIcon.vue';
 import ExitIcon from '@components/Icons/ExitIcon.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useRouter } from 'vue-router';
+import { onMounted, ref, watch } from 'vue';
+import { useProfileStore } from '@/stores/profile.store';
+import ConfirmPopup from '@components/ConfirmPopup.vue';
 
 const authStore = useAuthStore();
+const profileStore = useProfileStore();
 const router = useRouter();
+const isOpened = ref<boolean>(false);
+
+onMounted(() => {
+    profileStore.getUserProfile();
+})
 
 const logout = () => {
     authStore.clearToken();
@@ -25,16 +34,22 @@ const logout = () => {
                 <RouterLink to="/profile" active-class="active-link" title="View Profile">
                     <div class="profile-link">
                         <ProfileIcon class="profile-icon" />
-                        <p>Developer</p>
+                        <p>{{ profileStore.profile.name }}</p>
                     </div>
                 </RouterLink>
             </li>
-            <li>
-                <a href="#" @click="logout" aria-label="Logout" title="Logout">
+            <li @click="isOpened = !isOpened">
+                <a href="#" aria-label="Logout" title="Logout">
                     <ExitIcon class="exit-icon" />
                 </a>
             </li>
         </ul>
+        <ConfirmPopup
+            :is-opened="isOpened"
+            text="Are you sure you want to log out?"
+            @cancel="isOpened = false"
+            @ok="logout"
+        />
     </header>
 </template>
 
