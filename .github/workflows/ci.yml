@@ -1,4 +1,4 @@
-name: Vue 3 CI
+name: Vue 3 CI/CD
 
 on:
   push:
@@ -30,3 +30,28 @@ jobs:
 
       - name: 💅 Prettier format check
         run: npx prettier --check "src/**/*.{js,ts,vue,json,css,scss,md}"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🛠 Build
+        run: npm run build
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

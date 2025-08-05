@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.vue",
     "format": "prettier --write \"src/**/*.{js,ts,vue,json,css,scss,md}\"",
@@ -27,6 +28,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-vue": "^10.3.0",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.6.2",
     "typescript": "~5.8.3",
     "vite": "^7.0.4",

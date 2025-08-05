@@ -49,4 +49,7 @@ git clone https://github.com/your-username/vue-movie-app.git
 cd vue-movie-app
 
 ```
+🌐 Демо
+Развёрнуто на GitHub Pages:
+🔗 https://sergey-lang.github.io/vue-movie-app/
 
