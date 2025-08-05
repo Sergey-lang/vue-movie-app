@@ -5,7 +5,10 @@ import Input from '@components/Input.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useRouter } from 'vue-router';
 
-const form = ref<{ email?: string; password?: string }>({ email: 'john@mail.com', password: 'changeme' });
+const form = ref<{ email?: string; password?: string }>({
+    email: 'john@mail.com',
+    password: 'changeme',
+});
 const authStore = useAuthStore();
 const router = useRouter();
 
@@ -26,7 +29,6 @@ const onSubmit = (event: Event) => {
     authStore.login(form.value.email, form.value.password);
     form.value = {};
 };
-
 </script>
 
 <template>
@@ -34,7 +36,12 @@ const onSubmit = (event: Event) => {
         <form class="login__form" @submit="onSubmit">
             <h1>LOGIN</h1>
             <Input placeholder="Email" autocomplete="email" v-model="form.email" />
-            <Input placeholder="Password" type="password" autocomplete="current-password" v-model="form.password" />
+            <Input
+                placeholder="Password"
+                type="password"
+                autocomplete="current-password"
+                v-model="form.password"
+            />
             <Button type="submit" class="login__form_btn">Login</Button>
         </form>
     </div>
@@ -61,5 +68,4 @@ const onSubmit = (event: Event) => {
 .login__form_btn {
     width: 100%;
 }
-
 </style>

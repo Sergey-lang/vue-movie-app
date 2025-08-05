@@ -67,7 +67,11 @@ const handleClick = (item: number | string) => {
             <button
                 v-for="item in pagesToShow"
                 :key="item"
-                :disabled="item === 'dots' || (item === 'prev' && currentPage === 1) || (item === 'next' && currentPage === totalPages)"
+                :disabled="
+                    item === 'dots' ||
+                    (item === 'prev' && currentPage === 1) ||
+                    (item === 'next' && currentPage === totalPages)
+                "
                 :class="[
                     'pagination-button',
                     {

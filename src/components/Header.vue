@@ -14,13 +14,12 @@ const isOpened = ref<boolean>(false);
 
 onMounted(() => {
     profileStore.getUserProfile();
-})
+});
 
 const logout = () => {
     authStore.clearToken();
     router.push({ name: 'auth' });
 };
-
 </script>
 
 <template>

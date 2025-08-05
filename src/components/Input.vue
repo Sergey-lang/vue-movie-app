@@ -10,11 +10,11 @@ type OwnProps = {
 };
 
 withDefaults(defineProps<OwnProps>(), {
-    icon: false, error: null,
+    icon: false,
+    error: null,
 });
 
 const model = defineModel<string>({ default: '' });
-
 </script>
 
 <template>

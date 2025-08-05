@@ -7,15 +7,22 @@ const profileStore = useProfileStore();
 <template>
     <div class="profile" v-if="profileStore.profile">
         <img :src="profileStore.profile.avatar" alt="avatar" class="avatar" />
-        <h1 class="name">{{ profileStore.profile.name}}</h1>
-        <p class="role">Frontend-разработчик • Vue, TypeScript, UI/UX, {{profileStore.profile.role}}</p>
+        <h1 class="name">{{ profileStore.profile.name }}</h1>
+        <p class="role">
+            Frontend-разработчик • Vue, TypeScript, UI/UX, {{ profileStore.profile.role }}
+        </p>
         <p class="bio">
-            Увлекаюсь созданием интерфейсов для кино-приложений. Люблю лаконичный код и хорошую типографику.
+            Увлекаюсь созданием интерфейсов для кино-приложений. Люблю лаконичный код и хорошую
+            типографику.
         </p>
         <ul class="links">
             <li><a href="https://github.com/username" target="_blank">GitHub</a></li>
             <li><a href="https://t.me/username" target="_blank">Telegram</a></li>
-            <li><a :href="'mailto:' + profileStore.profile.email">{{profileStore.profile.email}}</a></li>
+            <li>
+                <a :href="'mailto:' + profileStore.profile.email">{{
+                    profileStore.profile.email
+                }}</a>
+            </li>
         </ul>
     </div>
 </template>

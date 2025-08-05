@@ -5,4 +5,4 @@ export type ProfileType = {
     name: string;
     role: string;
     avatar: string;
-}
+};

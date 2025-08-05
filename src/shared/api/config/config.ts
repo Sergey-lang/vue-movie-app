@@ -35,7 +35,7 @@ export async function http<T = unknown>(
         ...(authApi && {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authStore.getToken}`,
+                Authorization: `Bearer ${authStore.getToken}`,
             },
         }),
         body: method !== 'GET' && body ? JSON.stringify(body) : undefined,

@@ -8,7 +8,10 @@ export const router = createRouter({
             path: '/main',
             component: () => import('./pages/HomePage.vue'),
             children: [
-                { path: '', component: () => import('./widgets/HomePageLayout/HomePageLayout.vue') },
+                {
+                    path: '',
+                    component: () => import('./widgets/HomePageLayout/HomePageLayout.vue'),
+                },
                 { path: ':imdbID', component: () => import('./pages/MoviePage.vue') },
             ],
         },
@@ -24,7 +27,6 @@ export const router = createRouter({
     ],
     history: createWebHistory(),
 });
-
 
 router.beforeEach((to) => {
     const authStore = useAuthStore();

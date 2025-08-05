@@ -15,14 +15,10 @@ const handlePageChange = (page: number) => {
     store.currentPage = page;
     store.fetchMovies(store.query.trim(), page);
 };
-
 </script>
 
 <template>
-    <CardGrid
-        :movies="store.movies"
-        :is-loading="store.isLoading"
-    />
+    <CardGrid :movies="store.movies" :is-loading="store.isLoading" />
     <Empty v-if="!store.movies.length" />
     <Pagination
         v-if="store.totalPages > 1"

@@ -36,9 +36,8 @@ const activeRoute = computed(() => {
     return {
         authPage: router.path === '/',
         mainPage: router.path === '/main',
-    }
+    };
 });
-
 </script>
 
 <template>
@@ -55,5 +54,9 @@ const activeRoute = computed(() => {
             />
         </div>
     </Header>
-    <SearchBar v-if="debouncedQuery && activeRoute.mainPage" :query="debouncedQuery" :totalResults="store.totalResults" />
+    <SearchBar
+        v-if="debouncedQuery && activeRoute.mainPage"
+        :query="debouncedQuery"
+        :totalResults="store.totalResults"
+    />
 </template>
