@@ -50,11 +50,13 @@ cd vue-movie-app
 
 ```
 ## 🌐 Демо
+
 Приложение развёрнуто на GitHub Pages:
 🔗 https://sergey-lang.github.io/vue-movie-app/
 ---
 
 ## ⚙️ CI/CD (GitHub Actions + Pages)
+
 - 📦 Сборка проекта (vite build) и проверка качества кода (lint, prettier, tsc) автоматизированы через GitHub Actions
 - 🚀 Автодеплой на GitHub Pages при пуше в master
 - 🔐 API-ключ OMDb хранится в .env (локально) и в GitHub Secrets (в CI/CD) как VITE_OMDB_API_KEY
