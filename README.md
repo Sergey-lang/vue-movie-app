@@ -49,7 +49,13 @@ git clone https://github.com/your-username/vue-movie-app.git
 cd vue-movie-app
 
 ```
-🌐 Демо
-Развёрнуто на GitHub Pages:
+## 🌐 Демо
+Приложение развёрнуто на GitHub Pages:
 🔗 https://sergey-lang.github.io/vue-movie-app/
+---
 
+## ⚙️ CI/CD (GitHub Actions + Pages)
+- 📦 Сборка проекта (vite build) и проверка качества кода (lint, prettier, tsc) автоматизированы через GitHub Actions
+- 🚀 Автодеплой на GitHub Pages при пуше в master
+- 🔐 API-ключ OMDb хранится в .env (локально) и в GitHub Secrets (в CI/CD) как VITE_OMDB_API_KEY
+- 🛠 Во время билда ключ передаётся через env, и встраивается в import.meta.env.VITE_OMDB_API_KEY для использования в коде
