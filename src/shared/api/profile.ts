@@ -1,5 +1,5 @@
 import { http } from './config';
-import { ProfileType } from '@shared/types';
+import type { ProfileType } from '@shared/types';
 
 export const getUser = () => {
     return http<ProfileType>('auth/profile', 'GET', {

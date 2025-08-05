@@ -3,7 +3,7 @@ import ProfileIcon from '@components/Icons/ProfileIcon.vue';
 import ExitIcon from '@components/Icons/ExitIcon.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useRouter } from 'vue-router';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useProfileStore } from '@/stores/profile.store';
 import ConfirmPopup from '@components/ConfirmPopup.vue';
 
@@ -34,7 +34,7 @@ const logout = () => {
                 <RouterLink to="/profile" active-class="active-link" title="View Profile">
                     <div class="profile-link">
                         <ProfileIcon class="profile-icon" />
-                        <p>{{ profileStore.profile.name }}</p>
+                        <p>{{ profileStore?.profile?.name }}</p>
                     </div>
                 </RouterLink>
             </li>

@@ -1,4 +1,5 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
@@ -9,6 +10,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
+    "types": ["vite/client", "node"],
     "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -24,6 +26,5 @@
       "@widgets/*": ["src/widgets/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]
 }

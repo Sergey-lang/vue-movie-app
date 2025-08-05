@@ -7,8 +7,10 @@ const AUTH_BASE_URL = 'https://api.escuelajs.co/api/v1/'; // using for demo
 type HttpMethod = 'GET' | 'POST' | 'DELETE';
 
 type RequestOptions = {
+    authApi?: boolean;
     params?: Record<string, string | number>;
-    authApi?: boolean
+    body?: unknown;
+    headers?: Record<string, string>;
 };
 
 function buildQuery(params: Record<string, string | number> = {}, isAuthApi: boolean): string {
@@ -19,25 +21,24 @@ function buildQuery(params: Record<string, string | number> = {}, isAuthApi: boo
     return query.size !== 0 ? `?${query.toString()}` : '';
 }
 
-export async function http<T = any>(
+export async function http<T = unknown>(
     endpoint: string,
     method: HttpMethod = 'GET',
-    options: RequestOptions = { authApi: false },
+    { authApi = false, params, body }: RequestOptions = {},
 ): Promise<T> {
-    const BASE_API_URL = options.authApi ? AUTH_BASE_URL : BASE_URL;
-    const url = `${BASE_API_URL}${endpoint}${buildQuery(options.params, options.authApi)}`;
+    const BASE_API_URL = authApi ? AUTH_BASE_URL : BASE_URL;
+    const url = `${BASE_API_URL}${endpoint}${buildQuery(params, authApi)}`;
 
     const authStore = useAuthStore();
     const response = await fetch(url, {
         method,
-        ...options,
-        ...(options.authApi && {
+        ...(authApi && {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authStore.getToken}`
+                'Authorization': `Bearer ${authStore.getToken}`,
             },
         }),
-        body: method !== 'GET' && options.body ? JSON.stringify(options.body) : undefined,
+        body: method !== 'GET' && body ? JSON.stringify(body) : undefined,
     });
 
     if (!response.ok) {

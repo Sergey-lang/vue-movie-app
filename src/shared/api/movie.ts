@@ -1,5 +1,5 @@
 import { http } from './config';
-import { MovieType } from '../types';
+import type { MovieType } from '../types';
 
 export type SearchResponse = {
     Search: MovieType[];

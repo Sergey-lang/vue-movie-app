@@ -1,17 +1,22 @@
 import { defineStore } from 'pinia';
-import { Nullabel } from '@shared/types';
+import type { Nullable } from '@shared/types';
 import { computed, ref } from 'vue';
 import { authUser } from '@shared/api/auth';
 
-const ACCESS_TOKEN_KEY = 'access_token';
-const REFRESH_TOKEN_KEY = 'refresh_token';
+type TokenState = {
+    access_token: string;
+    refresh_token: string;
+};
 
-type TokenKey = ACCESS_TOKEN_KEY | REFRESH_TOKEN_KEY;
+type TokenKey = keyof TokenState;
+
+const ACCESS_TOKEN_KEY = 'access_token' as const;
+const REFRESH_TOKEN_KEY = 'refresh_token' as const;
 
 export const useAuthStore = defineStore('auth', () => {
-    const token = ref<{ access_token: string, refresh_token: string }>({});
+    const token = ref<TokenState>({ access_token: '', refresh_token: '' });
     const isLoading = ref<boolean>(false);
-    const error = ref<Nullabel<string>>(null);
+    const error = ref<Nullable<string>>(null);
 
     const initAccessValue = localStorage.getItem(ACCESS_TOKEN_KEY);
     const initRefreshValue = localStorage.getItem(REFRESH_TOKEN_KEY);
@@ -30,7 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
     };
 
     const clearToken = () => {
-        token.value = {};
+        token.value = { access_token: '', refresh_token: '' };
         localStorage.removeItem(ACCESS_TOKEN_KEY);
         localStorage.removeItem(REFRESH_TOKEN_KEY);
     };

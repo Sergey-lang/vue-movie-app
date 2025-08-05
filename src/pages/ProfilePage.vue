@@ -5,7 +5,7 @@ const profileStore = useProfileStore();
 </script>
 
 <template>
-    <div class="profile">
+    <div class="profile" v-if="profileStore.profile">
         <img :src="profileStore.profile.avatar" alt="avatar" class="avatar" />
         <h1 class="name">{{ profileStore.profile.name}}</h1>
         <p class="role">Frontend-разработчик • Vue, TypeScript, UI/UX, {{profileStore.profile.role}}</p>

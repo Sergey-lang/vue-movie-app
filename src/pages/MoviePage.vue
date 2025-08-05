@@ -31,8 +31,8 @@ const back = () => router.back();
             <div class="poster-wrapper">
                 <img
                     v-if="!store.isLoading"
-                    :src="store.movies[0].Poster"
-                    :alt="store.movies[0].Title"
+                    :src="store.movie.Poster"
+                    :alt="store.movie.Title"
                     class="movie-poster"
                     loading="lazy"
                     @error="handleImgError"
@@ -40,15 +40,15 @@ const back = () => router.back();
             </div>
         </div>
         <div class="movie-content">
-            <h1 class="movie-title">{{ store.movies[0].Title }}</h1>
+            <h1 class="movie-title">{{ store.movie.Title }}</h1>
             <ul class="movie-meta">
-                <li><strong>Year:</strong> {{ store.movies[0].Year }}</li>
-                <li><strong>IMDB ID:</strong> {{ store.movies[0].imdbID }}</li>
-                <li><strong>Type:</strong> {{ store.movies[0].Type }}</li>
+                <li><strong>Year:</strong> {{ store.movie.Year }}</li>
+                <li><strong>IMDB ID:</strong> {{ store.movie.imdbID }}</li>
+                <li><strong>Type:</strong> {{ store.movie.Type }}</li>
             </ul>
 
             <p class="movie-description">
-                {{ store.movies[0].Plot }}
+                {{ store.movie.Plot }}
             </p>
 
             <button @click="back" class="back-button">← Back</button>

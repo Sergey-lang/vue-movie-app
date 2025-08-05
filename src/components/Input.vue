@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import SearchIcon from '@components/Icons/SearchIcon.vue';
-import { Nullable } from '@shared/types';
+import type { Nullable } from '@shared/types';
 
-const model = defineModel();
+defineOptions({ inheritAttrs: false });
 
-withDefaults(
-    defineProps<{
-        icon?: boolean;
-        error?: Nullable<string>;
-    }>(),
-    {
-        icon: false,
-        error: null,
-    },
-);
+type OwnProps = {
+    icon?: boolean;
+    error?: Nullable<string>;
+};
+
+withDefaults(defineProps<OwnProps>(), {
+    icon: false, error: null,
+});
+
+const model = defineModel<string>({ default: '' });
 
 </script>
 
@@ -21,13 +21,9 @@ withDefaults(
     <div class="input-wrapper">
         <input
             :value="model"
-            @input="model = $event.target.value"
+            @input="model = ($event.target as HTMLInputElement).value"
             class="input"
-            :class="[`variant--${variant}`, `size--${size}`]"
             v-bind="$attrs"
-            :type="type"
-            :disabled="disabled"
-            :autofocus="autofocus"
         />
         <SearchIcon v-if="icon" class="search-icon" />
         <span v-if="error" class="error">{{ error }}</span>
